@@ -1,8 +1,8 @@
 import pytest
 
-from czml3.properties import Color
-from czml3.types import RgbafValue, RgbaValue
-from czml3.utils import get_color, get_color_list
+from czml4.properties import Color
+from czml4.types import RgbafValue, RgbaValue
+from czml4.utils import get_color, get_color_list
 
 
 def test_get_color_list_of_colors_rgba():
@@ -96,7 +96,7 @@ def test_get_color_rgba():
 def test_get_color_rgbaf():
     expected_color = Color(rgbaf=RgbafValue(values=[1.0, 0.8, 0.0, 1.0]))
 
-    # TODO: Simplify after https://github.com/poliastro/czml3/issues/36
+    # TODO: Simplify after https://github.com/poliastro/czml4/issues/36
     assert get_color([1.0, 0.8, 0.0]) == expected_color
     assert get_color([1.0, 0.8, 0.0, 1.0]) == expected_color
 
