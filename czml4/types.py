@@ -311,7 +311,7 @@ class TimeInterval(BaseCZMLObject):
         else:
             end = format_datetime_like(self._end)
 
-        return "{start}/{end}".format(start=start, end=end)
+        return f"{start}/{end}"
 
 
 @attr.s(str=False, frozen=True, kw_only=True)

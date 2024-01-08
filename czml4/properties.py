@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import math
-from typing import List, Tuple, Union
 
 import attr
 from w3lib.url import is_url, parse_data_uri
@@ -281,8 +280,8 @@ class Position(BaseCZMLObject, Interpolatable, Deletable):
             )
 
     def _get_xy_coords(
-        self, factor: Union[float, int] = 100.0
-    ) -> Tuple[List[float], List[float]]:
+        self, factor: float | int = 100.0
+    ) -> tuple[list[float], list[float]]:
         coords = []
         if self.cartographicRadians is not None:
             coords.extend(
@@ -296,8 +295,8 @@ class Position(BaseCZMLObject, Interpolatable, Deletable):
 
     @staticmethod
     def _get_bounds(
-        x_coords: List[float], y_coords: List[float]
-    ) -> Tuple[float, float, float, float]:
+        x_coords: list[float], y_coords: list[float]
+    ) -> tuple[float, float, float, float]:
         """Extract the coordinates into lists of x,y.
 
         The factor is required for points that are very close together, which SVG doesn't like.
@@ -309,7 +308,7 @@ class Position(BaseCZMLObject, Interpolatable, Deletable):
         y_min, y_max = min(y_coords), max(y_coords)
         return x_min, x_max, y_min, y_max
 
-    def _svg(self) -> Tuple[str, float, float, float, float]:
+    def _svg(self) -> tuple[str, float, float, float, float]:
         # get coordinates and bounds
         x_coords, y_coords = self._get_xy_coords()
         x_min, x_max, y_min, y_max = self._get_bounds(x_coords, y_coords)
@@ -387,7 +386,7 @@ class Corridor(BaseCZMLObject):
     classificationType = attr.ib(default=None)
     zIndex = attr.ib(default=None)
 
-    def _svg(self) -> Tuple[str, float, float, float, float]:
+    def _svg(self) -> tuple[str, float, float, float, float]:
         # get coordinates and bounds
         (
             x_coords,
@@ -472,7 +471,7 @@ class Polygon(BaseCZMLObject):
     outlineColor = attr.ib(default=None)
     outline = attr.ib(default=None)
 
-    def _svg(self) -> Tuple[str, float, float, float, float]:
+    def _svg(self) -> tuple[str, float, float, float, float]:
         # get coordinates and bounds
         x_coords, y_coords = self.positions._get_xy_coords()
         x_min, x_max, y_min, y_max = self.positions._get_bounds(x_coords, y_coords)
@@ -511,7 +510,7 @@ class Polyline(BaseCZMLObject):
     classificationType = attr.ib(default=None)
     zIndex = attr.ib(default=None)
 
-    def _svg(self) -> Tuple[str, float, float, float, float]:
+    def _svg(self) -> tuple[str, float, float, float, float]:
         # get coordinates and bounds
         x_coords, y_coords = self.positions._get_xy_coords()
         x_min, x_max, y_min, y_max = self.positions._get_bounds(x_coords, y_coords)
@@ -574,8 +573,8 @@ class PositionList(BaseCZMLObject, Deletable):
     references = attr.ib(default=None)
 
     def _get_xy_coords(
-        self, factor: Union[float, int] = 100.0
-    ) -> Tuple[List[float], List[float]]:
+        self, factor: float | int = 100.0
+    ) -> tuple[list[float], list[float]]:
         coords = []
         if self.cartographicRadians is not None:
             if isinstance(self.cartographicDegrees, CartographicRadiansListValue):
@@ -597,8 +596,8 @@ class PositionList(BaseCZMLObject, Deletable):
 
     @staticmethod
     def _get_bounds(
-        x_coords: List[float], y_coords: List[float]
-    ) -> Tuple[float, float, float, float]:
+        x_coords: list[float], y_coords: list[float]
+    ) -> tuple[float, float, float, float]:
         """Extract the coordinates into lists of x,y.
 
         The factor is required for points that are very close together, which SVG doesn't like.
@@ -610,7 +609,7 @@ class PositionList(BaseCZMLObject, Deletable):
         y_min, y_max = min(y_coords), max(y_coords)
         return x_min, x_max, y_min, y_max
 
-    def _svg(self) -> Tuple[str, float, float, float, float]:
+    def _svg(self) -> tuple[str, float, float, float, float]:
         # get coordinates and bounds
         x_coords, y_coords = self._get_xy_coords()
         x_min, x_max, y_min, y_max = self._get_bounds(x_coords, y_coords)
@@ -682,7 +681,7 @@ class Rectangle(BaseCZMLObject, Interpolatable, Deletable):
     fill = attr.ib(default=None)
     material = attr.ib(default=None)
 
-    def _svg(self) -> Tuple[str, float, float, float, float]:
+    def _svg(self) -> tuple[str, float, float, float, float]:
         # get coordinates and bounds
         deg_long0, deg_lat0, deg_long1, deg_lat1 = self.coordinates._get_xy_coords()
 
@@ -717,8 +716,8 @@ class RectangleCoordinates(BaseCZMLObject, Interpolatable, Deletable):
             )
 
     def _get_xy_coords(
-        self, factor: Union[float, int] = 100.0
-    ) -> Tuple[float, float, float, float]:
+        self, factor: float | int = 100.0
+    ) -> tuple[float, float, float, float]:
         deg_long0, deg_lat0, deg_long1, deg_lat1 = self.wsenDegrees
         return (
             deg_long0 * factor,
@@ -831,7 +830,7 @@ class Wall(BaseCZMLObject):
     shadows = attr.ib(default=None)
     distanceDisplayCondition = attr.ib(default=None)
 
-    def _svg(self) -> Tuple[str, float, float, float, float]:
+    def _svg(self) -> tuple[str, float, float, float, float]:
         # get coordinates and bounds
         x_coords, y_coords = self.positions._get_xy_coords()
         x_min, x_max, y_min, y_max = self.positions._get_bounds(x_coords, y_coords)
