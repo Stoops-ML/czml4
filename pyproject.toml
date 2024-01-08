@@ -2,7 +2,7 @@
 name = "czml4"
 version = "0.1.0"
 description = ""
-authors = ["Daniel Stoops <danielst@omnisys.co.il>"]
+authors = ["Daniel Stoops <danielstoops25@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
