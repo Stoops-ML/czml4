@@ -469,6 +469,8 @@ class Polygon(BaseCZMLObject):
     distanceDisplayCondition = attr.ib(default=None)
     classificationType = attr.ib(default=None)
     zIndex = attr.ib(default=None)
+    outlineColor = attr.ib(default=None)
+    outline = attr.ib(default=None)
 
     def _svg(self) -> Tuple[str, float, float, float, float]:
         # get coordinates and bounds
